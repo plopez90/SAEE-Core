@@ -2,7 +2,7 @@
  
 _Sistema Avanzado para Estacionamientos Eficientes_
 
-Este repositorio contiene el código del módulo core de SAEE, encargado de detectar si un espacio de estacionamiento está ocupado o libre mediante procesamiento de imágenes y enviar los resultados a una plataforma IoT a través de MQTT.
+Este repositorio contiene el código del módulo core de SAEE, encargado de detectar si un espacio de estacionamiento está ocupado o libre mediante procesamiento de imágenes y enviar los resultados a la thingsboard a través de MQTT.
 
 ## Estructura del Proyecto
 
@@ -25,11 +25,11 @@ Este script toma una imagen de referencia y superpone marcas visuales para que p
    - Esquina inferior izquierda
 
 ### 2. `parking_detection.py`
-Este script se encarga de capturar video en tiempo real, analizar los espacios de estacionamiento definidos y detectar si están ocupados o libres. Luego, envía esta información a una plataforma IoT mediante MQTT.
+Este script se encarga de capturar video en tiempo real, analizar los espacios de estacionamiento definidos y detectar si están ocupados o libres. Luego, envía esta información a una plataforma thingsboard mediante MQTT.
 
 #### Uso:
 1. Completa los espacios de estacionamiento con los puntos obtenidos de `reference_image_generator.py`.
-2. Ejecuta `parking_detection.py`. La detección comenzará automáticamente y enviará los datos a la plataforma MQTT.
+2. Ejecuta `parking_detection.py`. La detección comenzará automáticamente y enviará los datos a la plataforma thingsboard.
 
 ## Configuración MQTT
 El script `parking_detection.py` está configurado para enviar datos a ThingsBoard u otra plataforma MQTT. Asegúrate de configurar:
