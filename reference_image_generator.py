@@ -2,20 +2,29 @@ import cv2
 import time
 
 # Inicializa la cámara
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 if not cap.isOpened():
     print("No se puede abrir la cámara")
     exit()
 
-# Esperar 3 segundos para que la cámara esté lista
-print("Iniciando cámara...")
+print("Esperando a que la cámara se estabilice...")
+
+# Mantener la cámara encendida por 3 segundos antes de capturar la imagen (ajustado)
 time.sleep(3)
 
-# Capturar una imagen
+# Capturar un par de cuadros para asegurarse de que la cámara está lista
+for _ in range(10):
+    ret, frame = cap.read()
+    if not ret:
+        print("Error al capturar el frame")
+        cap.release()
+        exit()
+
+# Capturar el frame definitivo después de la espera
 ret, frame = cap.read()
 if not ret:
-    print("Error al capturar el frame")
+    print("Error al capturar el frame final")
     cap.release()
     exit()
 
@@ -50,8 +59,8 @@ for y in range(0, height, interval):
     cv2.putText(frame, str(y), (15, y + 5), font, font_scale, color, thickness)  # Izquierda
     cv2.putText(frame, str(y), (width - 40, y + 5), font, font_scale, color, thickness)  # Derecha
 
-# Guardar la imagen con las referencias en un archivo
-output_path = "output_image_with_references.jpg"  # Ruta donde se guardará la imagen
+# Guardar la imagen con referencias en un archivo
+output_path = "images/output_image_with_references.png"
 cv2.imwrite(output_path, frame)
 print(f"Imagen guardada en: {output_path}")
 
